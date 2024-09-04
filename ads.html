@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Евакуатор Мукачево</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(to right, #0062cc, #007bff);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 48px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .button-call {
+            background-color: #28a745;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-call:hover {
+            background-color: #218838;
+        }
+
+        section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .advantages, .faq, .reviews, .contact-form {
+            background-color: #fff;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 1000px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .advantages ul, .faq ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+            margin: 0;
+        }
+
+        .advantages li, .faq li {
+            margin: 15px 0;
+            font-size: 20px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .advantages li::before, .faq li::before {
+            content: "✔";
+            color: #28a745;
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+        }
+
+        .faq {
+            text-align: left;
+        }
+
+        .faq h2 {
+            font-size: 36px;
+            margin-bottom: 25px;
+        }
+
+        .faq ul {
+            margin-top: 10px;
+        }
+
+        .faq li {
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .faq li p {
+            margin: 10px 0 0 25px;
+            font-size: 20px;
+            line-height: 1.4;
+            color: #555;
+        }
+
+        /* Анимация для ответов */
+        .answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq li.active .answer {
+            max-height: 200px;
+        }
+
+        /* Slider Styles */
+        .slider {
+            position: relative;
+            max-width: 1000px;
+            margin: 40px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            height: 500px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+            height: 100%;
+            width: calc(100% + 20px);
+        }
+
+        .slides img {
+            width: calc(100% - 20px);
+            flex-shrink: 0;
+            height: 100%;
+            object-fit: cover;
+            margin-right: 20px;
+            border-radius: 10px;
+        }
+
+        .slider .prev, .slider .next {
+            height: 36px;
+            width: 36px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 24px;
+            transition: background-color 0.3s ease;
+        }
+
+        .slider .prev:hover, .slider .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .slider .prev {
+            left: 10px;
+        }
+
+        .slider .next {
+            right: 10px;
+        }
+
+        /* Dots */
+        .dots {
+            text-align: center;
+            padding: 15px 0;
+        }
+
+        .dots span {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dots .active {
+            background-color: #007bff;
+        }
+
+        /* Google Map Styling */
+        .map-container {
+            margin: 40px auto;
+            max-width: 1000px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 450px;
+            border: 0;
+            border-radius: 10px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+
+        footer a {
+            color: #ffc107;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .contact-form form input, .contact-form form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .contact-form form button {
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form form button:hover {
+            background-color: #0056b3;
+        }
+
+        .reviews {
+            text-align: left;
+        }
+
+        .reviews h2 {
+            font-size: 36px;
+            margin-bottom: 25px;
+        }
+
+        .review-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .review-item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .reviews p {
+            margin: 0;
+            font-size: 20px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .reviews p strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #000;
+            font-size: 22px;
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Евакуатор Мукачево</h1>
+    <p>Швидка та Надійна Допомога 24/7</p>
+    <a href="tel:+380660001782" class="button-call">Викликати евакуатор</a>
+</header>
+
+<section>
+    <p>Пропонуємо послуги евакуації автомобілів у радіусі 50 км від Мукачева</p>
+</section>
+
+<section class="advantages">
+    <h2>Наші Переваги</h2>
+    <ul>
+        <li>Цілодобова робота</li>
+        <li>Великий радіус покриття</li>
+        <li>Оперативність</li>
+        <li>Надійність та безпека</li>
+        <li>Заміна колес</li>
+        <li>Підзаряд аккумулятора</li>
+    </ul>
+</section>
+
+<section class="slider">
+    <div class="slides">
+        <img src="https://th.bing.com/th/id/R.e21690b4f9e45eaf62880ab5ab3f80d5?rik=%2fey3V3NC3nUuvw&pid=ImgRaw&r=0" alt="Фото 1">
+        <img src="https://th.bing.com/th/id/R.1ccd7e773ec7fbaafaa8f552656f6b41?rik=nig05r1RzJcuHA&pid=ImgRaw&r=0" alt="Фото 2">
+        <img src="https://th.bing.com/th/id/OIP.mjOfYTY7xlhfZjClTjyBqQHaFj?rs=1&pid=ImgDetMain" alt="Фото 3">
+        <img src="https://th.bing.com/th/id/R.e21690b4f9e45eaf62880ab5ab3f80d5?rik=%2fey3V3NC3nUuvw&pid=ImgRaw&r=0" alt="Фото 4">
+    </div>
+    <span class="prev" onclick="moveSlide(-1)">&#10094;</span>
+    <span class="next" onclick="moveSlide(1)">&#10095;</span>
+</section>
+
+<div class="dots">
+    <span class="dot active" onclick="currentSlide(0)"></span>
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+<section class="faq">
+    <h2>Часті запитання</h2>
+    <ul>
+        <li onclick="toggleAnswer(this)">
+            Як швидко ви зможете прибути на місце?
+            <p class="answer">Наші водії зазвичай прибувають протягом 30 хвилин після отримання виклику, залежно від місця розташування та дорожніх умов.</p>
+        </li>
+        <li onclick="toggleAnswer(this)">
+            Чи можна оплатити банківською картою?
+            <p class="answer">Так, ми приймаємо оплату як готівкою, так і банківськими картками. Всі наші водії оснащені мобільними терміналами.</p>
+        </li>
+        <li onclick="toggleAnswer(this)">
+            Які види автомобілів ви евакуюєте?
+            <p class="answer">Ми евакуюємо всі види легкових автомобілів, включаючи позашляховики та мінівени. Також надаємо послуги евакуації мотоциклів та невеликих вантажівок.</p>
+        </li>
+        <li onclick="toggleAnswer(this)">
+            Чи працюєте ви вночі та у святкові дні?
+            <p class="answer">Так, наша служба працює цілодобово, без вихідних і святкових днів, щоб ви могли отримати допомогу в будь-який час.</p>
+        </li>
+        <li onclick="toggleAnswer(this)">
+            Що робити, якщо мій автомобіль знаходиться у важкодоступному місці?
+            <p class="answer">Наші водії навчені працювати в різних умовах, включаючи складні та важкодоступні місця. Ми використовуємо сучасне обладнання, щоб безпечно евакуювати ваш автомобіль.</p>
+        </li>
+    </ul>
+</section>
+
+<section class="map-container">
+    <h2>Ми на карті</h2>
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1323.624837144218!2d22.69575777064666!3d48.43254769745942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb4532c6be46cc7b%3A0xabf0ab2549bef87b!2sEvakuator!5e0!3m2!1sru!2sua!4v1725439885060!5m2!1sru!2sua" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</section>
+
+<section class="reviews">
+    <h2>Відгуки клієнтів</h2>
+    <div class="review-item">
+        <img src="https://th.bing.com/th/id/OIP.iATni9luAsXDJpSzjSDVYQHaE7?rs=1&pid=ImgDetMain" alt="Анна К.">
+        <div>
+            <div class="stars">
+                ★★★★★
+            </div>
+            <p>
+                <strong>Анна К.</strong>
+                "Дуже вдячна за оперативну допомогу! Мій автомобіль зламався на трасі пізно ввечері, але евакуатор приїхав всього через 20 хвилин. Водій був дуже ввічливим і професійним."
+            </p>
+        </div>
+    </div>
+    <div class="review-item">
+        <img src="https://th.bing.com/th/id/OIP.p1BqV3BuOAWDPvpjxwau7QHaE8?rs=1&pid=ImgDetMain" alt="Дмитро С.">
+        <div>
+            <div class="stars">
+                ★★★★★
+            </div>
+            <p>
+                <strong>Дмитро С.</strong>
+                "Користувався послугами цієї компанії кілька разів, і завжди залишався задоволений. Евакуатор приїжджав швидко, а ціни були цілком адекватні. Рекомендую!"
+            </p>
+        </div>
+    </div>
+    <div class="review-item">
+        <img src="https://th.bing.com/th/id/R.47a638ea4665ea485ef6c1d580b9344b?rik=HYFhjDQ2Lk7oyg&riu=http%3a%2f%2fcdn.fishki.net%2fupload%2fpost%2f201505%2f01%2f1519678%2f_agmqrwf6o0.jpg&ehk=n2e1vDkjnPc62dFFFKatrg4ZKgkaWvGoF1B%2bG2LjRa0%3d&risl=&pid=ImgRaw&r=0" alt="Марина В.">
+        <div>
+            <div class="stars">
+                ★★★★★
+            </div>
+            <p>
+                <strong>Марина В.</strong>
+                "Потрапила в аварію, і мені потрібно було терміново прибрати машину з дороги. Зателефонувала до цієї компанії, і евакуатор приїхав за лічені хвилини. Дуже вдячна за швидку та якісну роботу."
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="contact-form">
+    <h2>Зв'яжіться з нами</h2>
+    <form>
+        <input type="text" name="name" placeholder="Ваше ім'я" required>
+        <input type="tel" name="phone" placeholder="Ваш телефон" required>
+        <textarea name="message" placeholder="Повідомлення" rows="4" required></textarea>
+        <button type="submit">Відправити</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2024 Евакуатор Мукачево. Всі права захищені.</p>
+    <p><a href="#">Про нас</a> | <a href="#">Політика конфіденційності</a> | <a href="#">Контакти</a></p>
+</footer>
+
+<script>
+    let currentSlideIndex = 0;
+    const slides = document.querySelector('.slides');
+    const totalSlides = slides.children.length;
+    const dots = document.querySelectorAll('.dot');
+
+    function moveSlide(direction) {
+        currentSlideIndex = (currentSlideIndex + direction + totalSlides) % totalSlides;
+        updateSlidePosition();
+    }
+
+    function currentSlide(index) {
+        currentSlideIndex = index;
+        updateSlidePosition();
+    }
+
+    function updateSlidePosition() {
+        slides.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[currentSlideIndex].classList.add('active');
+    }
+
+    function toggleAnswer(question) {
+        question.classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>
